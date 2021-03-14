@@ -5,6 +5,7 @@
 # 4. The total # of votes each candidate won
 # 5. the winner of the election based on popular votes
 
+# Add dependecies
 import csv
 import os
 # Assigning variable to load file from path
@@ -37,37 +38,48 @@ with open(file_to_load) as election_data:
             candidate_votes[candidate_name] = 0
         # add a vote towards the candidate count // make sure this is in 'for' loop & out of 'if' statement
         candidate_votes[candidate_name] += 1
-    # Determine percentage of votes for each candidate
-    for candidate_name in candidate_votes: ### make sure this for loop is outside the above for loop
-        # setting variable to get vote count for each candidate
-        votes = candidate_votes[candidate_name]
-        # calculation of votes; changingthe numbers to floating in order to calculate
-        vote_percentage = float(votes) / float(total_votes) * 100
-        # Print each candidate name: vote % and (total number fo votes)
-        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
-        # Determine winning vote count and candidate by running an if statement
-        if (votes > winning_count) and (vote_percentage > winning_percentage):
-            # if true
-            winning_count = votes
-            winning_percentage = vote_percentage
-            # set winning candidate to candidates name
-            winning_candidate = candidate_name
-    # Print out the winner's: name, vote count, percentage 
-    winning_candidate_summary = (
-        f"---------------\n"
-        f"Winner: {winning_candidate}\n"
-        f"Winning Vote Count: {winning_count:,}\n"
-        f"Winning Percentage: {winning_percentage:.1f}%\n"
-        f"---------------\n")
-    print(winning_candidate_summary)
-
-
-
-
+    # SAVING RESULTS TO TEXT FILE
+    with open(file_to_save, "w") as txt_file:
+        election_results = (
+            f"\nElection Results\n"
+            f"-------------------------\n"
+            f"Total Votes:{total_votes}\n"
+            f"-------------------------\n")
+        print(election_results, end="")
+        txt_file.write(election_results)
+        # Determine percentage of votes for each candidate
+        for candidate_name in candidate_votes: ### make sure this for loop is outside the above for loop
+            # setting variable to get vote count for each candidate
+            votes = candidate_votes[candidate_name]
+            # calculation of votes; changingthe numbers to floating in order to calculate
+            vote_percentage = float(votes) / float(total_votes) * 100
+            # Print each candidate name: vote % and (total number fo votes)
+            candidate_results = (f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+            print(candidate_results)
+            txt_file.write(candidate_results)
+            # Determine winning vote count and candidate by running an if statement
+            if (votes > winning_count) and (vote_percentage > winning_percentage):
+                # if true
+                winning_count = votes
+                winning_percentage = vote_percentage
+                # set winning candidate to candidates name
+                winning_candidate = candidate_name
+        # Print out the winner's: name, vote count, percentage 
+        winning_candidate_summary = (
+            f"-------------------------\n"
+            f"Winner: {winning_candidate}\n"
+            f"Winning Vote Count: {winning_count:,}\n"
+            f"Winning Percentage: {winning_percentage:.1f}%\n"
+            f"-------------------------\n")
+        print(winning_candidate_summary)
+        txt_file.write(winning_candidate_summary)
+ 
 # Left as comments (these were used to output the first couple steps)
 ## print(total_votes) 
 ## total_votes = 369711
 ## print(candidate_votes)
+
+# Ignore below comments - these are personal notes for outputing results in a text file from python
 
 #writing to files
 
@@ -76,6 +88,6 @@ with open(file_to_load) as election_data:
 # using the with statment, open the file as text file
 #with open(file_to_save, "w") as txt_file:
     # write data to test
-    # txt_file.write("Arapahoe, Denver, Jefferson") --- outputs all on the same line
+    ## txt_file.write("Arapahoe, Denver, Jefferson") --- outputs all on the same line
     # to write on separate lines, between each county type '\n' essentially saying return
-    #txt_file.write("Counties in the Election\n------------------------\nArapahoe\nDenver\nJefferson")
+    ## txt_file.write("Counties in the Election\n------------------------\nArapahoe\nDenver\nJefferson")
