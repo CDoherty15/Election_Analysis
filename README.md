@@ -5,7 +5,9 @@ The election commission has requested the following additional data and informat
 -	The voter turnout for each county 
 -	The percentage of votes from each county out of the total count
 -	The county with the highest turnout
-First will be to look and analyze the results. Then a quick summary of how the election commission can use this script of code can be used and some modifications that can be used for future elections.  
+First will be to look and analyze the results. Then a quick summary of how the election commission can use this script of code can be used and some modifications that can be used for future elections.
+- The code and csv excel file can be found in the "Resources" folder
+- The 'txt' file with the outputed data and links to each of the individual images used are in the "analysis" folder
 
 ## Election-Audit Results
 Here is the complete output of the election-audit results and each section of the results is looked at below.
